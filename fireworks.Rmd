@@ -1,0 +1,92 @@
+---
+title: "R Notebook"
+output:
+  html_document: default
+  html_notebook: default
+---
+
+```{r}
+library(ggplot2)
+
+```
+
+
+```{r}
+K=1:140
+CXk= cos(10*pi*K/14000)*(1-0.5*(cos(16*pi*K/14000))**2)
+CYk= sin(10*pi*K/14000)*(1-0.5*(sin(16*pi*K/14000))**2)
+Rk= 1/200+0.5*(sin(52*pi*K/14000))**4
+```
+
+```{r}
+t <- seq(0, 2*pi, length.out = 50)
+data = data.frame()
+for (k in K) {
+Xk= CXk[k] + Rk[k]*cos(t)
+Yk= CYk[k] + Rk[k]*sin(t)
+dk <- data.frame(t, Xk, Yk)
+data =rbind(data,dk)}
+
+```
+
+
+```{r}
+p <- ggplot(data, aes(Xk, Yk))
+p + geom_point(colour = "red", alpha = 0.1, aes(size = t),shape =1) + theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(), legend.position = "none",
+          axis.title.y=element_blank(),panel.background=element_rect(fill = "transparent"))
+
+```
+
+```{r}
+CXk_1= cos(pi*K/14000)*(1-0.5*(cos(pi*K/14000))**2)
+CYk_1= sin(pi*K/14000)*(1-0.5*(sin(pi*K/14000))**2)
+Rk_1= sample(10000:50000, 140)/100000
+```
+
+```{r}
+data_1 = data.frame()
+for (k in K) {
+Xk_1= CXk_1[k] + Rk_1[k]*cos(t)
+Yk_1= CYk_1[k] + Rk_1[k]*sin(t)
+dk_1 <- data.frame(t, Xk_1, Yk_1)
+data_1 =rbind(data_1,dk_1)}
+
+```
+
+
+```{r}
+p <- ggplot(data_1, aes(Xk_1, Yk_1))
+p + geom_point(colour = "red", alpha = 0.1, aes(size = t),shape =1) + theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(), legend.position = "none",
+          axis.title.y=element_blank(),panel.background=element_rect(fill = "transparent"))
+```
+
+```{r}
+CXk_2= cos(10*pi*K/14000)
+CYk_2= sin(10*pi*K/14000)
+Rk_2=+0.5*(sin(pi*K/14000))**4
+```
+
+```{r}
+t <- seq(0, 2*pi, length.out = 50)
+data_2 = data.frame()
+for (k in K) {
+Xk_2= CXk_2[k] + Rk_2[k]*cos(t)
+Yk_2= CYk_2[k] + Rk_2[k]*sin(t)
+dk_2 <- data.frame(t, Xk_2, Yk_2)
+data_2 =rbind(data_2,dk_2)}
+
+```
+
+
+```{r}
+p <- ggplot(data_2, aes(Xk_2, Yk_2))
+p + geom_point(colour = "red", alpha = 0.1, aes(size = t),shape =1) + theme(axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(), legend.position = "none",
+          axis.title.y=element_blank(),panel.background=element_rect(fill = "transparent"))
+
+```
